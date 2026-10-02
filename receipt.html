@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Receipt Generator - Herrington</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #f9fafb;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: rgba(15, 23, 42, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding: 100px 20px 60px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      width: 350px;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .receipt {
+      margin-top: 20px;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .receipt h2 {
+      margin-bottom: 10px;
+    }
+
+    .history {
+      margin-top: 30px;
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 12px;
+      width: 350px;
+      text-align: left;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .history h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .history ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .history li {
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: #f9fafb;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 8px;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 16px;
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .back-button:hover {
+      background: #0ea5e9;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      form, .history {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>Amano's</header>
+
+  <main>
+    <h1>Receipt Generator</h1>
+    <form id="receiptForm">
+      <label for="customer">Customer Name</label>
+      <input type="text" id="customer" required>
+
+      <label for="item">Item Purchased</label>
+      <input type="text" id="item" required>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" required>
+
+      <label for="price">Price per Item</label>
+      <input type="number" id="price" required>
+
+      <button type="submit">Generate Receipt</button>
+    </form>
+
+    <div class="receipt" id="receipt"></div>
+
+    <div class="history">
+      <h2>Saved Receipts</h2>
+      <ul id="receiptHistory"></ul>
+    </div>
+
+    <!-- Back button -->
+    <a href="index.html" class="back-button">← Back to Home</a>
+  </main>
+
+  <script>
+    const form = document.getElementById('receiptForm');
+    const receiptDiv = document.getElementById('receipt');
+    const historyList = document.getElementById('receiptHistory');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const customer = document.getElementById('customer').value.trim();
+      const item = document.getElementById('item').value.trim();
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const price = parseFloat(document.getElementById('price').value);
+
+      const total = (quantity * price).toFixed(2);
+
+      const receiptHTML = `
+        <h2>Receipt</h2>
+        <p><strong>Customer:</strong> ${customer}</p>
+        <p><strong>Item:</strong> ${item}</p>
+        <p><strong>Quantity:</strong> ${quantity}</p>
+        <p><strong>Price per Item:</strong> ₱${price.toFixed(2)}</p>
+        <p><strong>Total:</strong> ₱${total}</p>
+      `;
+
+      receiptDiv.innerHTML = receiptHTML;
+
+      // Save to history
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${customer}</strong> - ${item} x${quantity} = ₱${total}`;
+      historyList.appendChild(li);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>

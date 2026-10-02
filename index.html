@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amano's</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #f9fafb;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    header {
+      background: rgba(15, 23, 42, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+
+    header .logo {
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    header .logo span {
+      font-size: 24px;
+    }
+
+    /* Hero Section */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 20px 60px;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    p.tagline {
+      font-size: 18px;
+      margin-bottom: 50px;
+      color: #cbd5e1;
+    }
+
+    /* Cards */
+    .card-container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 30px;
+      width: 280px;
+      text-align: center;
+      text-decoration: none;
+      color: #f9fafb;
+      transition: transform 0.3s, background 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #cbd5e1;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Decorative background circles */
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+      z-index: 0;
+    }
+
+    .circle.one {
+      width: 200px;
+      height: 200px;
+      top: 10%;
+      left: 5%;
+    }
+
+    .circle.two {
+      width: 300px;
+      height: 300px;
+      bottom: 15%;
+      right: 10%;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(15, 23, 42, 0.95);
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+      .card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span></span> Amano's
+    </div>
+  </header>
+
+  <main>
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+
+    <h1>Welcome to Amano's SKU and Receipt Generator</h1>
+    <p class="tagline">Choose a tool below to get started</p>
+
+    <div class="card-container">
+      <a href="sku.html" class="card">
+        <h2>SKU Generator</h2>
+        <p>Create unique product codes based on category, name, and stock quantity.</p>
+      </a>
+      <a href="receipt.html" class="card">
+        <h2>Receipt Generator</h2>
+        <p>Generate clean, professional receipts with customer and order details.</p>
+      </a>
+    </div>
+  </main>
+
+
+</body>
+</html>
